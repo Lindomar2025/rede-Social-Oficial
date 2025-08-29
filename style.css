@@ -9,20 +9,40 @@
 
 body {
 
-    background-color: #b2f8f2;
+    background-color: #bed0ec;
 
 }
 
 header {
 
-    background-color: #b5eb95;
+    background-color: #85abf3;
 }
 
 main {
     display: grid;
+    padding: 30px;
 }
-h1{
+h1, h2{
 
     margin: auto;
     text-align: center;
+    padding: 10px;
+    padding-bottom: 10px;
+}
+
+fieldset {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.295);
+}
+
+fieldset > input {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 70%;
+    padding: 3px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
