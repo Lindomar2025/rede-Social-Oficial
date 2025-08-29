@@ -74,19 +74,15 @@
       <div class="b4"></div>
     </div>
 
-<div id="meu-modal" class="modal">
-  <div class="modal-content">
-    <h2>Insira aqui a sua foto</h2>
-    <form id="form-foto" enctype="multipart/form-data" method="POST" action="upload.php">
-      <input type="file" name="foto" accept="image/*" required>
-      <br><br>
-      <button type="submit">Salvar e Substituir</button>
-    </form>
-    <br>
-    <button id="fechar-modal">Fechar</button>
-  </div>
-</div>
-
+    <!-- Modal -->
+    <div id="meu-modal" class="modal">
+      <div class="modal-content">
+        <h2>Insira aqui a sua foto</h2>
+        <input type="file" id="input-foto" accept="image/*">
+        <br><br>
+        <button id="fechar-modal">Fechar</button>
+      </div>
+    </div>
 
     <!-- Overlay -->
     <div id="overlay" class="overlay"></div>
