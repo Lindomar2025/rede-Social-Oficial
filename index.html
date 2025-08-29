@@ -5,7 +5,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NewNex</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=home" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+  <style>
+    .modal, .overlay {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    .modal.visible, .overlay.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+    }
+
+    .modal {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      z-index: 1000;
+      min-width: 300px;
+      text-align: center;
+    }
+
+    button {
+      padding: 8px 14px;
+      border: none;
+      border-radius: 8px;
+      background: #007bff;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -13,31 +59,73 @@
   </header>
 
   <main>
-    
-
     <section id="foto">
-
-        <div class="quadrada" id="interacoes">
-          <img src="imagens/casal-feliz.jpg" alt="">
-         
-        </div>
-
-    
-  </section>
-    
+      <div class="quadrada" id="interacoes">
+        <img id="foto-principal" src="imagens/casal-feliz.jpg" alt="Foto principal">
+      </div>
+    </section>
   </main>
  
+  <footer>
+    <div class="container">
+      <div class="b1"><a href="index.html"><img src="imagens/homedesign.png" alt=""></a></div>
+      <div class="b3" id="abrir-modal"><a href="#"><img src="imagens/postesign.png" alt=""></a></div>
+      <div class="b2"><a href="cadastro.html"><img src="imagens/cadastrodesign.png" alt=""></a></div>
+      <div class="b4"></div>
+    </div>
 
- <a href="cadastro.html"></a>
- <footer>
+    <!-- Modal -->
+    <div id="meu-modal" class="modal">
+      <div class="modal-content">
+        <h2>Insira aqui a sua foto</h2>
+        <input type="file" id="input-foto" accept="image/*">
+        <br><br>
+        <button id="fechar-modal">Fechar</button>
+      </div>
+    </div>
 
-  <div class="container">
-  <div class="b1"><a href="index.html"><img src="imagens/homedesign.png" alt=""></a></div>
-  <div class="b3"><a href="#"><img src="imagens/postesign.png" alt=""></a></div>
-  <div class="b2"><a href="cadastro.html"><img src="imagens/cadastrodesign.png" alt=""></a></div>
-  <div class="b4"></div>
-  </div>
+    <!-- Overlay -->
+    <div id="overlay" class="overlay"></div>
+  </footer>
 
-</footer>
+  <script>
+    const abrirModalBtn = document.getElementById('abrir-modal');
+    const modal = document.getElementById('meu-modal');
+    const overlay = document.getElementById('overlay');
+    const fecharModalBtn = document.getElementById('fechar-modal');
+    const inputFoto = document.getElementById('input-foto');
+    const fotoPrincipal = document.getElementById('foto-principal');
+
+    function abrirModal() {
+      modal.classList.add('visible');
+      overlay.classList.add('visible');
+    }
+
+    function fecharModal() {
+      modal.classList.remove('visible');
+      overlay.classList.remove('visible');
+    }
+
+    abrirModalBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      abrirModal();
+    });
+
+    fecharModalBtn.addEventListener('click', fecharModal);
+    overlay.addEventListener('click', fecharModal);
+
+    // Substitui a imagem e fecha o modal automaticamente com fade-out
+    inputFoto.addEventListener('change', (event) => {
+      const arquivo = event.target.files[0];
+      if (arquivo) {
+        const leitor = new FileReader();
+        leitor.onload = function(e) {
+          fotoPrincipal.src = e.target.result;
+          fecharModal(); // fecha com animação
+        }
+        leitor.readAsDataURL(arquivo);
+      }
+    });
+  </script>
 </body>
 </html>

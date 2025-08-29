@@ -101,7 +101,42 @@
   <div class="b2"><a href="cadastro.html"><img src="imagens/cadastrodesign.png" alt=""></a></div>
   <div class="b4"></div>
   </div>
+<!-- Botão que vai abrir o modal -->
+<button id="abrir-modal">Abrir Modal</button>
 
+<!-- O modal em si -->
+<div id="meu-modal" class="modal">
+  <div class="modal-content">
+    <h2>Título do Modal</h2>
+    <p>Este é o conteúdo da modal.</p>
+    <button id="fechar-modal">Fechar</button>
+  </div>
+</div>
+
+<!-- O overlay -->
+<div id="overlay" class="overlay"></div>
  </footer>
+ <script>
+const abrirModalBtn = document.getElementById('abrir-modal');
+const modal = document.getElementById('meu-modal');
+const overlay = document.getElementById('overlay');
+const fecharModalBtn = document.getElementById('fechar-modal');
+
+abrirModalBtn.addEventListener('click', () => {
+  modal.classList.add('visible');
+  overlay.classList.add('visible');
+});
+
+fecharModalBtn.addEventListener('click', () => {
+  modal.classList.remove('visible');
+  overlay.classList.remove('visible');
+});
+
+// Fechar ao clicar no overlay
+overlay.addEventListener('click', () => {
+  modal.classList.remove('visible');
+  overlay.classList.remove('visible');
+});
+</script>
 </body>
 </html>

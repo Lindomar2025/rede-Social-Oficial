@@ -52,6 +52,20 @@ section#foto {
             border: 1px solid #3b0581;
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(208, 226, 243, 0.986);
+    height: auto;
+    width: 400px;
+    padding: 20px;
+    margin: auto;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid #3b0581;
+}
 
 
 .quadrada > img {
@@ -92,11 +106,13 @@ fieldset > input {
 .container {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* quatro colunas de tamanhos iguais */
+  max-width: 400px;
   gap: 20px; /* Espaço entre os itens */
   padding: 10px;
   border: 1px solid black;
   border: none;
   padding-top: 40px;
+  margin: auto;
 }
 
 .b1 {
@@ -143,9 +159,50 @@ fieldset > input {
 
 img {
     height: 58px;
-    width: 58px;
-    border-radius: 50%;
+    -radius: 50%;
     margin: auto;
     display: block;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
     
+}
+
+.modal {
+  position: fixed; /* Fica fixo na tela */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centraliza o modal */
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  z-index: 1000; /* Garante que fique acima de outros elementos */
+  display: none; /* Começa escondido */
+  min-width: 320px; /* Tamanho mínimo */
+}
+
+.modal-content {
+  text-align: center;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 999; /* Fica abaixo do modal */
+  display: none; /* Começa escondido */
+}
+
+/* Estilo para quando o modal está visível */
+.modal.visible {
+  display: block;
+}
+.overlay.visible {
+  display: block;
 }
