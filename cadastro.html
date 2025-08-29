@@ -54,7 +54,9 @@
     </form>
 
    
-  </main> <footer>
+  </main> 
+  
+  <footer>
     <div class="container">
       <div class="b1"><a href="index.html"><img src="imagens/homedesign.png" alt=""></a></div>
       <div class="b3" id="abrir-modal"><a href="#"><img src="imagens/postesign.png" alt=""></a></div>
@@ -62,19 +64,15 @@
       <div class="b4"></div>
     </div>
 
-<div id="meu-modal" class="modal">
-  <div class="modal-content">
-    <h2>Insira aqui a sua foto</h2>
-    <form id="form-foto" enctype="multipart/form-data" method="POST" action="upload.php">
-      <input type="file" name="foto" accept="image/*" required>
-      <br><br>
-      <button type="submit">Salvar e Substituir</button>
-    </form>
-    <br>
-    <button id="fechar-modal">Fechar</button>
-  </div>
-</div>
-
+  <!-- Modal -->
+    <div id="meu-modal" class="modal">
+      <div class="modal-content">
+        <h2>Insira aqui a sua foto</h2>
+        <input type="file" id="input-foto" accept="image/*">
+        <br><br>
+        <button id="fechar-modal">Fechar</button>
+      </div>
+    </div>
 
     <!-- Overlay -->
     <div id="overlay" class="overlay"></div>
