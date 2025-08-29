@@ -1,27 +1,68 @@
 @charset "UTF-8";
 
-* {
+/* Paleta de Cores
 
+#fac9c9
+#3b0581
+#f39585
+
+*/
+
+* {
     padding: 0px;
     margin: 0px;
 
 }
+:root
 
 body {
 
-    background-color: #bed0ec;
 
+
+    background-color: #cee2f3;
 }
 
 header {
-
-    background-color: #85abf3;
+    background-color: #85e6f3;
+    padding-bottom: 5px;
+    width: 430px;
+    margin: auto;
 }
 
-main {
-    display: grid;
-    padding: 30px;
+section#interacoes {
+            display: flex;
+            background-color: rgba(243, 208, 208, 0.986);
+            height: 60px;
+            width: 400px;
+            padding: 20px;
+            margin: auto;
+             margin-top: 5px;
+             border-radius: 10px;
 }
+
+section#foto {
+            display: flex;
+            background-color: rgb(252, 252, 252);
+            height: 600px;
+            width: 400px;
+            padding: 0px;
+            margin: auto;
+            margin-top: 10px;
+            border-radius: 10px;
+            border: 1px solid #3b0581;
+}
+
+
+
+.quadrada > img {
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+    margin: 0px;
+}
+
+
 h1, h2{
 
     margin: auto;
@@ -45,4 +86,66 @@ fieldset > input {
     margin: 5px 0;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* quatro colunas de tamanhos iguais */
+  gap: 20px; /* Espaço entre os itens */
+  padding: 10px;
+  border: 1px solid black;
+  border: none;
+  padding-top: 40px;
+}
+
+.b1 {
+
+    background-color: white;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    margin-right: 35px;
+}
+
+
+.b2 {
+
+    background-color: white;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    margin-right: 35px;
+
+}
+
+
+.b3 {
+
+    background-color: white;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    margin-right: 35px;
+
+}
+
+
+.b4 {
+
+    background-color: white;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    margin-right: 35px;
+
+}
+
+img {
+    height: 58px;
+    width: 58px;
+    border-radius: 50%;
+    margin: auto;
+    display: block;
+    
 }
