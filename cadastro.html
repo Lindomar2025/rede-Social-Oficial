@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NewNex</title>
+  <title>Cadastro com CEP</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,18 +12,17 @@
   </header>
 
   <main>
-    
-    <form method="post">
+    <form method="post" action="confirmar_cadastro.php">
       <fieldset>
         <legend>Dados Pessoais</legend>
         <label>Nome Completo:</label>
         <input type="text" id="nome" name="nome" required><br>
 
         <label>E-mail:</label>
-        <input type="email" id="email" name="email" required><br>
+        <input type="email" required id="email" name="email"   autocomplete="off"><br>
 
         <label>Senha:</label>
-        <input type="password" id="senha" name="senha" required><br><br>
+        <input type="password" required id="senha" name="senha" autocomplete="off"><br><br>
       </fieldset>
 
       <br>
@@ -32,7 +31,7 @@
         <legend>Cadastro do Endereço</legend><br>
 
         <label for="cep">CEP:</label>
-        <input type="text" id="cep" name="cep" required><br>
+        <input type="text" id="cep" name="cep" maxlength="9" required><br>
 
         <label>Endereço:</label>
         <input type="text" id="endereco" name="endereco" required><br>
@@ -52,70 +51,53 @@
 
       <button type="submit">Cadastrar</button>
     </form>
-
-   
-  </main> 
-  
-  <footer>
-    <div class="container">
-      <div class="b1"><a href="index.html"><img src="imagens/homedesign.png" alt=""></a></div>
-      <div class="b3" id="abrir-modal"><a href="#"><img src="imagens/postesign.png" alt=""></a></div>
-      <div class="b2"><a href="cadastro.html"><img src="imagens/cadastrodesign.png" alt=""></a></div>
-      <div class="b4"></div>
-    </div>
-
-  <!-- Modal -->
-    <div id="meu-modal" class="modal">
-      <div class="modal-content">
-        <h2>Insira aqui a sua foto</h2>
-        <input type="file" id="input-foto" accept="image/*">
-        <br><br>
-        <button id="fechar-modal">Fechar</button>
-      </div>
-    </div>
-
-    <!-- Overlay -->
-    <div id="overlay" class="overlay"></div>
-  </footer>
+  </main>
 
   <script>
-    const abrirModalBtn = document.getElementById('abrir-modal');
-    const modal = document.getElementById('meu-modal');
-    const overlay = document.getElementById('overlay');
-    const fecharModalBtn = document.getElementById('fechar-modal');
-    const inputFoto = document.getElementById('input-foto');
-    const fotoPrincipal = document.getElementById('foto-principal');
+    // Função para buscar o CEP no ViaCEP
+    document.getElementById("cep").addEventListener("blur", function() {
+      let cep = this.value.replace(/\D/g, ''); // remove caracteres não numéricos
 
-    function abrirModal() {
-      modal.classList.add('visible');
-      overlay.classList.add('visible');
-    }
-
-    function fecharModal() {
-      modal.classList.remove('visible');
-      overlay.classList.remove('visible');
-    }
-
-    abrirModalBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      abrirModal();
-    });
-
-    fecharModalBtn.addEventListener('click', fecharModal);
-    overlay.addEventListener('click', fecharModal);
-
-    // Substitui a imagem e fecha o modal automaticamente com fade-out
-    inputFoto.addEventListener('change', (event) => {
-      const arquivo = event.target.files[0];
-      if (arquivo) {
-        const leitor = new FileReader();
-        leitor.onload = function(e) {
-          fotoPrincipal.src = e.target.result;
-          fecharModal(); // fecha com animação
-        }
-        leitor.readAsDataURL(arquivo);
+      if (cep.length === 8) {
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+          .then(response => response.json())
+          .then(data => {
+            if (!("erro" in data)) {
+              document.getElementById("endereco").value = data.logradouro || "";
+              document.getElementById("bairro").value   = data.bairro || "";
+              document.getElementById("cidade").value   = data.localidade || "";
+              document.getElementById("estado").value   = data.uf || "";
+            } else {
+              alert("CEP não encontrado!");
+            }
+          })
+          .catch(error => {
+            alert("Erro ao consultar o CEP!");
+            console.error(error);
+          });
       }
     });
   </script>
+
+  <script>
+  // Função para pegar parâmetros da URL
+  function getParam(name) {
+    const url = new URL(window.location.href);
+    return url.searchParams.get(name) || "";
+  }
+
+  // Preenche os campos com os dados recebidos
+  document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("nome").value     = getParam("nome");
+    document.getElementById("email").value    = getParam("email");
+    document.getElementById("cep").value      = getParam("cep");
+    document.getElementById("endereco").value = getParam("endereco");
+    document.getElementById("numero").value   = getParam("numero");
+    document.getElementById("bairro").value   = getParam("bairro");
+    document.getElementById("cidade").value   = getParam("cidade");
+    document.getElementById("estado").value   = getParam("estado");
+  });
+</script>
+
 </body>
 </html>
